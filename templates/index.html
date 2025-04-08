@@ -1,0 +1,49 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeGANv2 Web App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+  <style>
+    body { background-color: #f7f7f7; padding-top: 50px; }
+    .container { max-width: 600px; }
+    .card { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">AnimeGANv2 Style Transfer</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+    <div class="card">
+      <div class="card-body">
+        <form action="{{ url_for('generate_route') }}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="file">Upload an Image:</label>
+            <input type="file" class="form-control-file" name="file" id="file" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label for="style">Select Style:</label>
+            <select class="form-control" name="style" id="style" required>
+              <option value="Hayao">Hayao</option>
+              <option value="Paprika">Paprika</option>
+              <option value="Shinkai">Shinkai</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Generate</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
