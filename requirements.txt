@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 Flask
 numpy
 Werkzeug
 tensorflow==1.15
 opencv-python
-=======
 torch >= 1.7.1
 torchvision
->>>>>>> 068bf002f72ce88e46c2ac5f948ef6aaaa5de2f4
