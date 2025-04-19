@@ -1,2 +1,7 @@
+Flask
+numpy
+Werkzeug
+tensorflow==1.15
+opencv-python
 torch >= 1.7.1
 torchvision
