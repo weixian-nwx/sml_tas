@@ -52,7 +52,8 @@ model = Generator()
 # checkpoint_path = (
 #     r"C:\Users\shuti\OneDrive\Documents\Term 8 Modules\40.319 Statistical and Machine Learning\sml_tas\weights\paprika\generator.pth"
 # )
-checkpoint_path = os.path.join("weights", "generator.pth")
+# checkpoint_path = os.path.join("weights", "generator.pth")
+checkpoint_path = "weights/paprika/generator.pth"
 model.load_state_dict(torch.load(checkpoint_path, map_location=device))
 model.to(device)
 model.eval()
