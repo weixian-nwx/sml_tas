@@ -49,9 +49,10 @@ socketio = SocketIO(app, async_mode="threading", cors_allowed_origins="*")
 # PyTorch model setup
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = Generator()
-checkpoint_path = (
-    r"C:\Users\shuti\OneDrive\Documents\Term 8 Modules\40.319 Statistical and Machine Learning\sml_tas\weights\paprika\generator.pth"
-)
+# checkpoint_path = (
+#     r"C:\Users\shuti\OneDrive\Documents\Term 8 Modules\40.319 Statistical and Machine Learning\sml_tas\weights\paprika\generator.pth"
+# )
+checkpoint_path = os.path.join("weights", "generator.pth")
 model.load_state_dict(torch.load(checkpoint_path, map_location=device))
 model.to(device)
 model.eval()
@@ -155,5 +156,9 @@ def download_file(filename):
         as_attachment=True
     )
 
+# if __name__ == "__main__":
+#     socketio.run(app, host="0.0.0.0", port=5000)
+
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    socketio.run(app, host="0.0.0.0", port=port)
