@@ -1,0 +1,8 @@
+model_checkpoint_path: "AnimeGANv2.model-15"
+all_model_checkpoint_paths: "AnimeGANv2.model-9"
+all_model_checkpoint_paths: "AnimeGANv2.model-10"
+all_model_checkpoint_paths: "AnimeGANv2.model-11"
+all_model_checkpoint_paths: "AnimeGANv2.model-12"
+all_model_checkpoint_paths: "AnimeGANv2.model-13"
+all_model_checkpoint_paths: "AnimeGANv2.model-14"
+all_model_checkpoint_paths: "AnimeGANv2.model-15"
