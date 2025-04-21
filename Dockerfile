@@ -8,13 +8,14 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install required system dependencies
+# The next line installs libgl1-mesa-glx to fix OpenCV's libGL.so.1 error
 RUN apt-get update && apt-get install -y \
     build-essential \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    libgl1-mesa-glx \     # ✅ This line fixes the OpenCV libGL.so.1 error
+    libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
