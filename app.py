@@ -89,13 +89,6 @@ def generate_image(input_image_path, style):
     save_images(output, output_path, None)
     return output_filename
 
-    except Exception as e:
-        print("[ERROR in generate_image]", e)
-        traceback.print_exc()
-        raise
-
-
-
 
 # def generate_image(input_image_path, style):
 #     try:
