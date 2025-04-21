@@ -240,6 +240,12 @@ def download_file(filename):
 # if __name__ == "__main__":
 #     socketio.run(app, host="0.0.0.0", port=5000)
 
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+#     socketio.run(app, host="0.0.0.0", port=port)
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
-    socketio.run(app, host="0.0.0.0", port=port)
+    import eventlet
+    import eventlet.wsgi
+    port = int(os.environ.get("PORT", 5000))
+    eventlet.wsgi.server(eventlet.listen(("0.0.0.0", port)), app)
