@@ -46,7 +46,7 @@
             method="post"
             enctype="multipart/form-data"
           >
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="file-input" class="form-label">Select Image</label>
               <input
                 type="file"
@@ -56,7 +56,23 @@
                 accept="image/*"
                 required
               >
-            </div>
+            </div> -->
+
+            <div class="mb-3" style="display: flex; flex-direction: column;">
+              <label for="file-input" class="form-label">Select Image</label>
+              <input
+                type="file"
+                class="form-control"
+                name="file"
+                id="file-input"
+                accept="image/*"
+                required
+              >
+              <small style="font-size: 0.75rem; color: #0057ae; padding-left: 0.5rem;">
+                Only png, jpg, jpeg, gif are allowed
+              </small>
+            </div>            
+            
             <div class="mb-3">
               <label for="style-select" class="form-label">Choose Style</label>
               <select
