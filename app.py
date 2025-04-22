@@ -67,6 +67,7 @@ def allowed_file(filename):
 
 def generate_image(input_image_path, style):
     try:
+        print("11")
         checkpoint_dir = STYLE_CHECKPOINTS.get(style)
         if not checkpoint_dir:
             raise ValueError(f"Invalid style selected: {style}")
@@ -80,19 +81,20 @@ def generate_image(input_image_path, style):
         test_real = tf.compat.v1.placeholder(
             tf.float32, [1, None, None, 3], name="test_real"
         )
-
+        print("12")
         with tf.compat.v1.variable_scope("generator", reuse=False):
             test_generated = generator.G_net(test_real).fake
-
+        print("13")
         saver = tf.compat.v1.train.Saver()
         with tf.compat.v1.Session() as sess:
             saver.restore(sess, tf.train.latest_checkpoint(checkpoint_dir))
             output = sess.run(test_generated, feed_dict={test_real: sample_image})
-
+        print("14")
         timestamp = int(time.time())
         output_filename = f"result_{style}_{timestamp}.jpg"
         output_path = os.path.join(app.config["RESULT_FOLDER"], output_filename)
         save_images(output, output_path, None)
+        print("15")
         return output_filename
 
     except Exception as e:
@@ -107,48 +109,48 @@ def index():
 
 @app.route("/generate", methods=["POST"])
 def generate_route():
+    print("1")
     try:
         # 1) File checks
         if "file" not in request.files:
             return jsonify(error="No file part in the request"), 400
-
+        print("2")
         file = request.files["file"]
         if file.filename == "":
             return jsonify(error="No file selected"), 400
-
+        print("3")
         if not allowed_file(file.filename):
             return jsonify(error="Allowed file types are png, jpg, jpeg, gif"), 400
-
+        print("4")
         # 2) Save upload
         filename = secure_filename(file.filename)
         upload_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(upload_path)
-
+        print("5")
         # 3) Style selection
         style = request.form.get("style")
         if not style:
             return jsonify(error="Style not selected"), 400
-        
+        print("6")
         # 4) Try generating image
         result_filename = generate_image(upload_path, style)
-
+        print("7")
         # 5) Return result
         orig_url = url_for("static", filename=f"uploads/{filename}")
         gen_url = url_for("static", filename=f"results/{result_filename}")
-        return jsonify(error="just testing"), 400
-        # return jsonify(orig_url=orig_url, gen_url=gen_url, style=style)
-
+        print("8")
+        return jsonify(orig_url=orig_url, gen_url=gen_url, style=style)
+        
     except Exception as e:
         # Show full error logs in Render
         traceback.print_exc()
+        print("9")
         return jsonify(error=str(e)), 500
-
-
-
 
 
 @app.route("/download/<filename>")
 def download_file(filename):
+    print("10")
     return send_from_directory(
         app.config["RESULT_FOLDER"],
         filename,
